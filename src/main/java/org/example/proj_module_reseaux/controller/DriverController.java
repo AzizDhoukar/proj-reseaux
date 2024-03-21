@@ -60,7 +60,12 @@ public class DriverController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteDriver(@PathVariable("id") Long id) {
         driverService.deleteDriver(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        Driver driver = driverService.getDriverById(id);
+        if (driver != null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
     }
 }
 

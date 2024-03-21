@@ -1,6 +1,8 @@
 package org.example.proj_module_reseaux.controller;
 
 import org.example.proj_module_reseaux.model.Client;
+import org.example.proj_module_reseaux.model.Driver;
+import org.example.proj_module_reseaux.repository.ClientRepository;
 import org.example.proj_module_reseaux.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -61,7 +63,12 @@ public class ClientController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteClient(@PathVariable("id") Long id) {
         clientService.deleteClient(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        Client client = clientService.getClientById(id);
+        if (client != null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
     }
 
 }
