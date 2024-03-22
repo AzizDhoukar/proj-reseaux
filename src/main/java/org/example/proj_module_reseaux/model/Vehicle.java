@@ -1,10 +1,7 @@
 package org.example.proj_module_reseaux.model;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -13,6 +10,7 @@ import lombok.ToString;
 @Setter
 @Getter
 @Entity
+@Table(name = "vehicles")
 public class Vehicle {
 
     @Id
@@ -23,6 +21,16 @@ public class Vehicle {
     private String color;
 
     // Constructors
+
+    public Vehicle(String licensePlate, String model, String color) {
+        this.licensePlate = licensePlate;
+        this.model = model;
+        this.color = color;
+    }
+
+    public Vehicle() {
+
+    }
 
     // Getters and Setters
 

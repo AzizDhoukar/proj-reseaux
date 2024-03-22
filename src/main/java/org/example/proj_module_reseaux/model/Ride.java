@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 @Setter
 @Getter
 @Entity
+@Table(name = "rides")
 public class Ride {
 
     @Id
@@ -27,6 +28,19 @@ public class Ride {
     private Driver driver;
 
     // Constructors
+
+    public Ride(String pickupLocation, String dropOffLocation, LocalDateTime pickupTime, LocalDateTime dropOffTime, Client client, Driver driver) {
+        this.pickupLocation = pickupLocation;
+        this.dropOffLocation = dropOffLocation;
+        this.pickupTime = pickupTime;
+        this.dropOffTime = dropOffTime;
+        this.client = client;
+        this.driver = driver;
+    }
+
+    public Ride() {
+
+    }
 
     // Getters and Setters
 

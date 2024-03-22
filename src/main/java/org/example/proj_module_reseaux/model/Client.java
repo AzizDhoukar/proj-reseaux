@@ -9,6 +9,7 @@ import lombok.ToString;
 @Setter
 @Getter
 @Entity
+@Table(name = "clients")
 public class Client {
 
     @Id
@@ -16,8 +17,19 @@ public class Client {
     private Long id;
     private String name;
     private String phone;
+    private String dataOfBirth;
 
     // Constructors
+
+    public Client(String name, String phone, String dataOfBirth) {
+        this.name = name;
+        this.phone = phone;
+        this.dataOfBirth = dataOfBirth;
+    }
+
+    public Client() {
+
+    }
 
     // Getters and Setters
 
