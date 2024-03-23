@@ -1,27 +1,27 @@
 package org.example.proj_module_reseaux.model;
 
-
 import jakarta.persistence.*;
 import lombok.*;
+import java.time.LocalDateTime;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "dirvers")
-public class Driver {
-
+public class ClientLocationHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false)
-    private String name;
-    @Column(nullable = false)
-    private String phone;
 
+    private double latitude;
 
-    private String lat;
-    private String lon;
+    private double longitude;
+
+    private LocalDateTime timestamp;
+
+    @ManyToOne
+    private Client client;
+
 }
 

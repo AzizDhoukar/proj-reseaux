@@ -1,14 +1,14 @@
 package org.example.proj_module_reseaux.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
+
 import java.time.LocalDateTime;
 
-@ToString
-@Setter
-@Getter
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "rides")
 public class Ride {
@@ -27,24 +27,4 @@ public class Ride {
     @ManyToOne
     private Driver driver;
 
-    // Constructors
-
-    public Ride(String pickupLocation, String dropOffLocation, LocalDateTime pickupTime, LocalDateTime dropOffTime, Client client, Driver driver) {
-        this.pickupLocation = pickupLocation;
-        this.dropOffLocation = dropOffLocation;
-        this.pickupTime = pickupTime;
-        this.dropOffTime = dropOffTime;
-        this.client = client;
-        this.driver = driver;
-    }
-
-    public Ride() {
-
-    }
-
-    // Getters and Setters
-
-    // toString() method
-
-    // Other helper methods if needed
 }
