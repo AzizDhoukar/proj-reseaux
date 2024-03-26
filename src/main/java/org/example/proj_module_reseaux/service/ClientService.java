@@ -3,6 +3,7 @@ package org.example.proj_module_reseaux.service;
 import jakarta.persistence.EntityNotFoundException;
 import org.example.proj_module_reseaux.model.Client;
 import org.example.proj_module_reseaux.repository.ClientRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
 public class ClientService {
     private final ClientRepository clientRepository;
 
+    @Autowired
     public ClientService (ClientRepository clientRepository){
         this.clientRepository = clientRepository;
     }

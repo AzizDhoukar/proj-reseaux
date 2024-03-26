@@ -23,4 +23,12 @@ public class Client {
 
     private String lat;
     private String lon;
+
+    public Client(String name, String phone, String dataOfBirth, String lat, String lon) {
+        this.name = name;
+        this.phone = phone;
+        this.dataOfBirth = dataOfBirth;
+        this.lat = lat;
+        this.lon = lon;
+    }
 }
