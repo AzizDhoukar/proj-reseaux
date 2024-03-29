@@ -23,19 +23,41 @@ public class WebSocketController {
         this.driverService = driverService;
     }
 
-    @MessageMapping("/clientLocation")  //the message is sent to /app/clientLocation
-    @SendTo("/track/client") //The return value is broadcast to all subscribers of /topic/greetings
+    @MessageMapping("/clientLocation")  //the client location is sent to /app/clientLocation
+    @SendTo("/track/client") //The client location is broadcast to all subscribers of /topic/client
     public ClientLocationHistory updateLocation(ClientLocationHistory location) throws Exception {
+        System.out.print("location");
         // send the new location to the database
         // update the relevant parties of the update
         return clientService.saveClientLocationHistory(location);
     }
-    @MessageMapping("/driverLocation")  //the message is sent to /app/clientLocation
-    @SendTo("/track/driver") //The return value is broadcast to all subscribers of /topic/greetings
-    public DriverLocationHistory updateLocation(DriverLocationHistory location) throws Exception {
+    @MessageMapping("/driverLocation")  //the driver location is sent to /app/clientLocation
+    @SendTo("/track/driver") //The driver location is broadcast to all subscribers of /topic/greetings
+    public DriverLocationHistory updateLocation(Coords location) throws Exception {
+        System.out.print("location");
         // send the new location to the database
-        driverService.saveDriverLocationHistory(location);
+        //driverService.saveDriverLocationHistory(location);
         // update the relevant parties of the update
-        return location;
+        return new DriverLocationHistory();
+    }
+
+    public class LocationData {
+        private long timestamp;
+        private boolean mocked;
+        private Coords coords;
+
+        // Getters and setters
+    }
+
+    public class Coords {
+        private double speed;
+        private double longitude;
+        private double latitude;
+        private int heading;
+        private double altitudeAccuracy;
+        private double altitude;
+        private double accuracy;
+
+        // Getters and setters
     }
 }

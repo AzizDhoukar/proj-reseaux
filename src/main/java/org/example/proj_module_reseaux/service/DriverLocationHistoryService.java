@@ -8,6 +8,7 @@ import java.util.List;
 
 @Service
 public class DriverLocationHistoryService {
+    /*
     private final DriverLocationHistoryRepository Repository;
 
 
@@ -29,4 +30,5 @@ public class DriverLocationHistoryService {
     public void deleteDriverLocationHistory(Long id){
         Repository.deleteById(id);
     }
+    */
 }
