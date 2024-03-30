@@ -7,6 +7,8 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 @Entity
 @Table(name = "clients")
 public class Client {
@@ -15,20 +17,21 @@ public class Client {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
+    @NonNull
     private String name;
     @Column(nullable = false)
+    @NonNull
     private String phone;
-    @Column(nullable = false)
-    private String dataOfBirth;
 
-    private String lat;
-    private String lon;
+    private double lat;
+    private double lon;
 
-    public Client(String name, String phone, String dataOfBirth, String lat, String lon) {
+    public Client(String name, String phone, Long lat, Long lon) {
         this.name = name;
         this.phone = phone;
-        this.dataOfBirth = dataOfBirth;
         this.lat = lat;
         this.lon = lon;
     }
+
+
 }

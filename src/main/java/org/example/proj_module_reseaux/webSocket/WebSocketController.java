@@ -23,22 +23,22 @@ public class WebSocketController {
         this.driverService = driverService;
     }
 
-    @MessageMapping("/clientLocation")  //the client location is sent to /app/clientLocation
-    @SendTo("/track/client") //The client location is broadcast to all subscribers of /topic/client
+    @MessageMapping("/clientLocation")  //the client sends to /app/clientLocation
+    @SendTo("/track/client") //The client location is broadcast to all subscribers this path
     public ClientLocationHistory updateLocation(ClientLocationHistory location) throws Exception {
         System.out.print("location");
         // send the new location to the database
         // update the relevant parties of the update
         return clientService.saveClientLocationHistory(location);
     }
-    @MessageMapping("/driverLocation")  //the driver location is sent to /app/clientLocation
-    @SendTo("/track/driver") //The driver location is broadcast to all subscribers of /topic/greetings
-    public DriverLocationHistory updateLocation(Coords location) throws Exception {
-        System.out.print("location");
+    @MessageMapping("/driverLocation")  //the driver sends to /app/clientLocation
+    @SendTo("/track/driver") //The driver location is broadcast to all subscribers of this path
+    public Coords  updateLocation(Coords coords) throws Exception {
+        System.out.print("location" + coords);
         // send the new location to the database
         //driverService.saveDriverLocationHistory(location);
         // update the relevant parties of the update
-        return new DriverLocationHistory();
+        return coords;
     }
 
     public class LocationData {

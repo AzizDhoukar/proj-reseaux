@@ -2,6 +2,7 @@ package org.example.proj_module_reseaux.controller;
 
 import org.example.proj_module_reseaux.model.Client;
 import org.example.proj_module_reseaux.model.Driver;
+import org.example.proj_module_reseaux.model.Location;
 import org.example.proj_module_reseaux.repository.ClientRepository;
 import org.example.proj_module_reseaux.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +43,7 @@ public class ClientController {
     }
 
     // Endpoint to create a new client
-    @PostMapping
+    @PostMapping()
     public ResponseEntity<Client> createClient(@RequestBody Client client) {
         Client createdClient = clientService.saveClient(client);
         return new ResponseEntity<>(createdClient, HttpStatus.CREATED);
@@ -69,6 +70,12 @@ public class ClientController {
         } else {
             return new ResponseEntity<>(HttpStatus.OK);
         }
+    }
+
+    @PostMapping("location/{id}")
+    public ResponseEntity<Client> createClient(@RequestBody Location location, @PathVariable("id") long id) {
+        Client client = clientService.updateLocation(id, location);
+        return new ResponseEntity<>(client, HttpStatus.OK);
     }
 
 }

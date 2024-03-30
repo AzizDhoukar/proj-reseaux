@@ -8,8 +8,10 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 @Entity
-@Table(name = "dirvers")
+@Table(name = "drivers")
 public class Driver {
 
     @Id
