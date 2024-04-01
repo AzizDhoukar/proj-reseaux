@@ -1,7 +1,9 @@
 package org.example.proj_module_reseaux.service;
 
 import jakarta.persistence.EntityNotFoundException;
+import org.example.proj_module_reseaux.model.Client;
 import org.example.proj_module_reseaux.model.Driver;
+import org.example.proj_module_reseaux.model.Location;
 import org.example.proj_module_reseaux.repository.DriverRepository;
 import org.springframework.stereotype.Service;
 
@@ -41,5 +43,13 @@ public class DriverService {
 
         // Save the updated driver to the database
         return driverRepository.save(existingDriver);
+    }
+
+    public Driver updateLocation(long id, Location location) {
+        Driver driver = driverRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Client not found with ID: " + id));
+        driver.setLon(location.getLon());
+        driver.setLat(location.getLat());
+        return driverRepository.save(driver);
     }
 }

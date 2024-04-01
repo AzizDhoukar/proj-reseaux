@@ -23,7 +23,7 @@ public class Driver {
     private String phone;
 
 
-    private String lat;
-    private String lon;
+    private double lat;
+    private double lon;
 }
 

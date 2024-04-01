@@ -32,6 +32,4 @@ public class Client {
         this.lat = lat;
         this.lon = lon;
     }
-
-
 }

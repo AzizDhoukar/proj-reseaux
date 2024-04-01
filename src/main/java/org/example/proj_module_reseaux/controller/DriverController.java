@@ -1,6 +1,8 @@
 package org.example.proj_module_reseaux.controller;
 
+import org.example.proj_module_reseaux.model.Client;
 import org.example.proj_module_reseaux.model.Driver;
+import org.example.proj_module_reseaux.model.Location;
 import org.example.proj_module_reseaux.service.DriverService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -66,6 +68,11 @@ public class DriverController {
         } else {
             return new ResponseEntity<>(HttpStatus.OK);
         }
+    }
+    @PostMapping("location/{id}")
+    public ResponseEntity<Driver> createClient(@RequestBody Location location, @PathVariable("id") long id) {
+        Driver driver = driverService.updateLocation(id, location);
+        return new ResponseEntity<>(driver, HttpStatus.OK);
     }
 }
 

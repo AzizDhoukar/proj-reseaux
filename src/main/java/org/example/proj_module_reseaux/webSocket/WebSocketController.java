@@ -2,6 +2,7 @@ package org.example.proj_module_reseaux.webSocket;
 
 import org.example.proj_module_reseaux.model.ClientLocationHistory;
 import org.example.proj_module_reseaux.model.DriverLocationHistory;
+import org.example.proj_module_reseaux.model.Location;
 import org.example.proj_module_reseaux.repository.ClientLocationHistoryRepository;
 import org.example.proj_module_reseaux.repository.ClientRepository;
 import org.example.proj_module_reseaux.service.ClientLocationHistoryService;
@@ -25,39 +26,19 @@ public class WebSocketController {
 
     @MessageMapping("/clientLocation")  //the client sends to /app/clientLocation
     @SendTo("/track/client") //The client location is broadcast to all subscribers this path
-    public ClientLocationHistory updateLocation(ClientLocationHistory location) throws Exception {
-        System.out.print("location");
+    public Location clientLocation(Location location) throws Exception {
+        System.out.print("location" + location);
         // send the new location to the database
         // update the relevant parties of the update
-        return clientService.saveClientLocationHistory(location);
+        return location;
     }
     @MessageMapping("/driverLocation")  //the driver sends to /app/clientLocation
     @SendTo("/track/driver") //The driver location is broadcast to all subscribers of this path
-    public Coords  updateLocation(Coords coords) throws Exception {
-        System.out.print("location" + coords);
+    public Location driverLocation(Location location) throws Exception {
+        System.out.print("location: " + location);
         // send the new location to the database
         //driverService.saveDriverLocationHistory(location);
         // update the relevant parties of the update
-        return coords;
-    }
-
-    public class LocationData {
-        private long timestamp;
-        private boolean mocked;
-        private Coords coords;
-
-        // Getters and setters
-    }
-
-    public class Coords {
-        private double speed;
-        private double longitude;
-        private double latitude;
-        private int heading;
-        private double altitudeAccuracy;
-        private double altitude;
-        private double accuracy;
-
-        // Getters and setters
+        return location;
     }
 }
