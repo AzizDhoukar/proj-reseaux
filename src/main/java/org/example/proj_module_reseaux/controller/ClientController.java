@@ -5,6 +5,7 @@ import org.example.proj_module_reseaux.model.Driver;
 import org.example.proj_module_reseaux.model.Location;
 import org.example.proj_module_reseaux.repository.ClientRepository;
 import org.example.proj_module_reseaux.service.ClientService;
+import org.example.proj_module_reseaux.service.DriverService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,12 +17,14 @@ import java.util.List;
 @RequestMapping("/api/clients")
 public class ClientController {
     private final ClientService clientService;
+    private final DriverService driverService;
 
     //private final EntityService clientService;
 
     @Autowired
-    public ClientController(ClientService clientService) {
+    public ClientController(ClientService clientService, DriverService driverService) {
         this.clientService = clientService;
+        this.driverService = driverService;
     }
 
     // Endpoint to retrieve all clients
@@ -76,6 +79,24 @@ public class ClientController {
     public ResponseEntity<Client> createClient(@RequestBody Location location, @PathVariable("id") long id) {
         Client client = clientService.updateLocation(id, location);
         return new ResponseEntity<>(client, HttpStatus.OK);
+    }
+
+    @GetMapping("request/{id}")
+    public ResponseEntity<Driver> requestDriver(@PathVariable("id") long id) {
+        List<Driver> drivers = driverService.getAllDrivers();
+        Client client = clientService.getClientById(id);
+        //look for the closest driver
+        Driver closestDriver = null;
+        double minDistance = Double.MAX_VALUE;
+
+        for (Driver driver : drivers) {
+            double distance = clientService.calculateDistance(client.getLat(), client.getLon(), driver.getLat(), driver.getLon());
+            if (distance < minDistance) {
+                minDistance = distance;
+                closestDriver = driver;
+            }
+        }
+        return new ResponseEntity<>(closestDriver, HttpStatus.OK);
     }
 
 }

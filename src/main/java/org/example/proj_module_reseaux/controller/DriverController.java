@@ -74,5 +74,7 @@ public class DriverController {
         Driver driver = driverService.updateLocation(id, location);
         return new ResponseEntity<>(driver, HttpStatus.OK);
     }
+
+    
 }
 
