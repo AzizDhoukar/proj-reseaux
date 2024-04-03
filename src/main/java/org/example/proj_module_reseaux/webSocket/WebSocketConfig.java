@@ -12,15 +12,18 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
-        config.enableSimpleBroker("/track"); //this is where the client will subscribe
+        config.enableSimpleBroker("/topic"); //this is where the client will subscribe
         config.setApplicationDestinationPrefixes("/app");
     }
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) { //this is where the client will stomp
+        registry.addEndpoint("/payroll").setAllowedOriginPatterns("*").withSockJS();
+
         registry.addEndpoint("/clientLocation");
         registry.addEndpoint("/clientLocation").withSockJS();
         registry.addEndpoint("/driverLocation");
         registry.addEndpoint("/driverLocation").withSockJS();
+
     }
 }
