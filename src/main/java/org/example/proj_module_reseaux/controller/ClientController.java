@@ -96,6 +96,8 @@ public class ClientController {
                 closestDriver = driver;
             }
         }
+        assert closestDriver != null;
+        closestDriver.setClientId(client.getId());
         return new ResponseEntity<>(closestDriver, HttpStatus.OK);
     }
 

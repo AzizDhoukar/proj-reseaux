@@ -27,5 +27,6 @@ public class Driver {
 
     private double lat;
     private double lon;
+    private Long ClientId;
 }
 
