@@ -1,10 +1,10 @@
 package org.example.proj_module_reseaux.service;
 
 import jakarta.persistence.EntityNotFoundException;
-import org.example.proj_module_reseaux.model.Client;
 import org.example.proj_module_reseaux.model.Driver;
 import org.example.proj_module_reseaux.model.Location;
 import org.example.proj_module_reseaux.repository.DriverRepository;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -51,5 +51,14 @@ public class DriverService {
         driver.setLon(location.getLon());
         driver.setLat(location.getLat());
         return driverRepository.save(driver);
+    }
+
+    @Scheduled(fixedRate = 1000) // Update position every second
+    public void updateDriverPosition() {
+        // Simulate movement or update logic here
+        // For demonstration purposes, we'll just increment/decrement the coordinates
+
+        // Ensure the position stays within valid ranges, e.g., latitude [-90, 90], longitude [-180, 180]
+        // You can add logic to reset the position or simulate movement within a specific area
     }
 }

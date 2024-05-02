@@ -3,7 +3,6 @@ package org.example.proj_module_reseaux.controller;
 import org.example.proj_module_reseaux.model.Client;
 import org.example.proj_module_reseaux.model.Driver;
 import org.example.proj_module_reseaux.model.Location;
-import org.example.proj_module_reseaux.repository.ClientRepository;
 import org.example.proj_module_reseaux.service.ClientService;
 import org.example.proj_module_reseaux.service.DriverService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -100,5 +99,4 @@ public class ClientController {
         closestDriver.setClientId(client.getId());
         return new ResponseEntity<>(closestDriver, HttpStatus.OK);
     }
-
 }
