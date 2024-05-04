@@ -23,8 +23,6 @@ public class Driver {
     private String name;
     @Column(nullable = false)
     private String phone;
-
-
     private double lat;
     private double lon;
     private Long ClientId;

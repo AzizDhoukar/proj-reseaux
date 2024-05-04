@@ -18,22 +18,16 @@ public class ClientController {
     private final ClientService clientService;
     private final DriverService driverService;
 
-    //private final EntityService clientService;
-
     @Autowired
     public ClientController(ClientService clientService, DriverService driverService) {
         this.clientService = clientService;
         this.driverService = driverService;
     }
-
-    // Endpoint to retrieve all clients
     @GetMapping
     public ResponseEntity<List<Client>> getAllClients() {
         List<Client> clients = clientService.getAllClients();
         return new ResponseEntity<>(clients, HttpStatus.OK);
     }
-
-    // Endpoint to retrieve a single client by ID
     @GetMapping("/{id}")
     public ResponseEntity<Client> getClientById(@PathVariable("id") Long id) {
         Client client = clientService.getClientById(id);
@@ -43,15 +37,11 @@ public class ClientController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-
-    // Endpoint to create a new client
     @PostMapping()
     public ResponseEntity<Client> createClient(@RequestBody Client client) {
         Client createdClient = clientService.saveClient(client);
         return new ResponseEntity<>(createdClient, HttpStatus.CREATED);
     }
-
-    // Endpoint to update an existing client
     @PutMapping("/{id}")
     public ResponseEntity<Client> updateClient(@PathVariable("id") Long id, @RequestBody Client client) {
         Client updatedClient = clientService.updateClient(id, client);
@@ -61,8 +51,6 @@ public class ClientController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-
-    // Endpoint to delete an existing client
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteClient(@PathVariable("id") Long id) {
         clientService.deleteClient(id);
@@ -73,13 +61,11 @@ public class ClientController {
             return new ResponseEntity<>(HttpStatus.OK);
         }
     }
-
     @PostMapping("location/{id}")
     public ResponseEntity<Client> createClient(@RequestBody Location location, @PathVariable("id") long id) {
         Client client = clientService.updateLocation(id, location);
         return new ResponseEntity<>(client, HttpStatus.OK);
     }
-
     @GetMapping("request/{id}")
     public ResponseEntity<Driver> requestDriver(@PathVariable("id") long id) {
         List<Driver> drivers = driverService.getAllDrivers();
